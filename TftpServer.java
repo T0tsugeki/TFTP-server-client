@@ -16,6 +16,18 @@ class TftpServerWorker extends Thread
          * open the file using a FileInputStream and send it, one block at
          * a time, to the receiver.
          */
+
+        try{//only works if try catch block cause of things like unhandled SocketException
+            DatagramSocket ds = new DatagramSocket();	 
+            SocketAddress sa = req.getSocketAddress(); //gets te sender socket address
+
+            ds.setSoTimeout(1000); //allows for a second before retransmission
+
+            FileInputStream fis = new FileInputStream(filename); //FileInputStream for reading files
+        }
+        catch(Exception e){	
+            System.out.println(e);
+        }   
 	return;
     }
 
@@ -25,6 +37,20 @@ class TftpServerWorker extends Thread
          * parse the request packet, ensuring that it is a RRQ
          * and then call sendfile
          */
+
+        //Need try catch so no SocketException
+        try{
+            DatagramSocket ds = new DatagramSocket();
+
+            System.out.println("TFTP SERVER IS RUNNING!!!!");
+
+
+            InetAddress reqIA=req.getAddress();
+        }
+        catch(Exception e){	
+            System.out.println(e);
+        }  
+
 	return;
     }
 
